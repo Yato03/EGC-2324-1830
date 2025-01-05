@@ -40,6 +40,18 @@ jobs:
           pip install codacy-coverage
           cp decide/local_settings.gactions.py decide/local_settings.py
 
+      - name: Crear Release en GitHub
+        id: crear_release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: "Release ${{ github.ref_name }}"
+          body: |
+            ## Cambios en esta versión
+            - Detalle de los cambios realizados.
+          draft: false
+          prerelease: false
+
       - name: Run migrations (unnecessary)
         run: |
           cd decide
